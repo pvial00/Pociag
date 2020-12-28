@@ -68,41 +68,41 @@ skA, nA, MA = keygen(size)
 skB, nB, MB = keygen(size)
 
 print "Alice keys"
-print skA, nA, MA
+print(skA, nA, MA)
 print "Bob keys"
-print skB, nB, MB
+print(skB, nB, MB)
 U = nA * nB
 UB = nA * nB * MB
 S = U * MA
 SB = U * MB
-print "Generating ephemeral public keys"
+print("Generating ephemeral public keys")
 y = number.getRandomRange(1, (S - 1))
 yB = number.getRandomRange(1, (SB - 1))
 TkA = number.getRandomRange(1, (U - 1))
 TkB = number.getRandomRange(1, (U - 1))
 
-print y, yB
+print(y, yB)
 p1 = pow(y, TkA, U)
 p1B = pow(y, TkB, U)
-print "p1", p1, p1B
+print("p1", p1, p1B)
 p2 = pow(p1B, TkA, S)
 p2B = pow(p1, TkB, SB)
-print p2, p2B
+print(p2, p2B)
 p3 = pow(p2B, skA, S)
 p3B = pow(p2, skB, SB)
-print p3, p3B
+print(p3, p3B)
 p4 = pow(p3B, TkA, U)
 p4B = pow(p3, TkB, U)
-print p4, p4B
+print(p4, p4B)
 p5 = pow(p4B, TkA, U)
 p5B = pow(p4, TkB, U)
-print p5, p5B
+print(p5, p5B)
 p6 = pow(p5B, skA, U)
 p6B = pow(p5, skB, U)
-print p6, p6B
+print(p6, p6B)
 Osk = discreteLogarithm(p4, p5, U)
-print Osk
+print(Osk)
 o1 = pow(p5B, Osk, U)
-print "Secret", o1
+print("Secret", o1)
 #o2 = pow(p3B, Osk, o1)
 #print o2
